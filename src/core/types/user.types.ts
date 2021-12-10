@@ -9,4 +9,5 @@ export interface IUser {
     followers?: number
     following?: number
     public_repos?: number
+    followers_url?: string
 }

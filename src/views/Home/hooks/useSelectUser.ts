@@ -14,4 +14,16 @@ const useSelectUser = () => {
     return select
 }
 
+export const useShowFollower = () => {
+    const context = useContext(UserContext)
+
+    const showFollower = (status: boolean) => {
+        if (context?.showFollower) {
+            context.showFollower(status)
+        }
+    }
+
+    return showFollower
+}
+
 export default useSelectUser

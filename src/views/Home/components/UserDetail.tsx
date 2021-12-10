@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useQueryUser } from 'core/queries/user.queries'
-import useSelectUser from '../hooks/useSelectUser'
+import useSelectUser, { useShowFollower } from '../hooks/useSelectUser'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 
@@ -53,17 +53,24 @@ const InfoBox = styled(Flex)`
     border-bottom: 1px solid ${({ theme }) => theme.colors.border};
 `
 
+const ButtonLink = styled.button``
+
 type IProps = {
     userId: string
 }
 
 const UserDetail = ({ userId }: IProps) => {
     const reset = useSelectUser()
+    const showFollower = useShowFollower()
 
     const { data: user, isLoading } = useQueryUser(userId)
 
     const goBack = () => {
-        reset()
+        reset() // Reset user
+    }
+
+    const handleFollowClick = () => {
+        showFollower(true)
     }
 
     if (isLoading) {
@@ -104,7 +111,9 @@ const UserDetail = ({ userId }: IProps) => {
                         <Text textAlign="center" fontSize={3} fontWeight="bold">
                             {user.followers}
                         </Text>
-                        <Text textAlign="center">Followers</Text>
+                        <ButtonLink onClick={handleFollowClick}>
+                            <Text textAlign="center">Followers</Text>
+                        </ButtonLink>
                     </Box>
                     <Box width="30%">
                         <Text textAlign="center" fontSize={3} fontWeight="bold">

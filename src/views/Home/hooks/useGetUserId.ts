@@ -1,10 +1,10 @@
 import { useContext } from 'react'
 import { UserContext } from '../UserContext'
 
-const useGetUserId = (): string | undefined => {
+const useGetUserId = () => {
     const context = useContext(UserContext)
 
-    return context?.userId
+    return { userId: context?.userId, isShowFollower: context?.isShowFollower }
 }
 
 export default useGetUserId
